@@ -1,4 +1,4 @@
-# Reverse proxy for AWS S3 w/ basic authentication
+ # Reverse proxy for AWS S3 w/ basic authentication
 
 ![circleci status](https://circleci.com/gh/pottava/aws-s3-proxy.svg?style=shield&circle-token=9bc17d02e4513df42196523a1791465e65d8ab01)
 
