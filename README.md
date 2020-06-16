@@ -97,3 +97,5 @@ proxy:
 ## Copyright and license
 
 Code released under the [MIT license](https://github.com/pottava/aws-s3-proxy/blob/master/LICENSE).
+
+sych
