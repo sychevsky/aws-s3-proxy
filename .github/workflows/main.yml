@@ -1,24 +1,22 @@
-name: Publish Docker images
+name: Publish images
 
 on:
   push:
-    tags:
-    - "*"
+    branches:
+    - master
+    paths:
+    - './Dockerfile'
 
 jobs:
-  docker-image-2-0:
-    name: v2.0
-    if: github.event_name == 'push' && contains(github.ref, 'v2.0.')
-    runs-on: ubuntu-18.04
-    env:
-      IMAGE_NAME: docker.pkg.github.com/${{ github.repository }}/linux:2.0
+  main:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Publish
+      uses: dawidd6/action-docker-publish-changed@master
       with:
-        fetch-depth: 1
-    - name: Build & Push
-      run: |
-        docker login docker.pkg.github.com -u owner -p ${{ secrets.GITHUB_TOKEN }}
-        docker build -t $IMAGE_NAME docker/linux/2.0/
-        docker push $IMAGE_NAME
-    timeout-minutes: 10
+        docker_username: ${{secrets.DOCKER_LOGIN}}
+        docker_password: ${{secrets.DOCKER_PASS}}
+        github_token: ${{secrets.GITHUB_TOKEN}}
+        platforms: linux/amd64,linux/arm64,linux/arm
